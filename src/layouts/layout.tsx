@@ -22,7 +22,7 @@ const iconStyles = {
 };
 
 
-const App = () => {
+const DefaultLayout = () => {
     const [expand, setExpand] = React.useState(true);
     return (
         <div className="show-fake-browser sidebar-page">
@@ -31,7 +31,6 @@ const App = () => {
             </Container>
             <Container>
                 <StudioLeftSidebar expand={expand} setExpand={setExpand}/>
-
                 <Container>
                     <Header>
                         <h2>Page Title</h2>
@@ -43,4 +42,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default DefaultLayout;
