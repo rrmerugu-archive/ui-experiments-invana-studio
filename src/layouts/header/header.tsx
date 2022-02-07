@@ -6,15 +6,16 @@ import CodeIcon from '@rsuite/icons/Code';
 import React from "react";
 import HistoryIcon from '@rsuite/icons/History';
 import ScatterIcon from '@rsuite/icons/Scatter';
+import {HelpOutline} from "@rsuite/icons";
 const StudioHeader = () => {
 
     return (
         <Header>
             <Navbar appearance="inverse">
                 <Navbar.Header>
-                    <a className="navbar-brand logo" style={{
-                        padding: 14,
-                        fontSize: 18,
+                    <a className="navbar-brand logo" href={"/"} style={{
+                        padding: 8,
+                        fontSize: 24,
                         fontWeight: 'bold',
                         width: 320,
                         height: 56,
@@ -30,16 +31,19 @@ const StudioHeader = () => {
                     <Nav>
                         {/*<Nav.Item icon={<ProjectIcon/>}>Projects</Nav.Item>*/}
                         {/*<Nav.Item icon={<ExploreIcon/>}>Marketplace</Nav.Item>*/}
-                        <Nav.Item icon={<ScatterIcon/>}>Model</Nav.Item>
-                        <Nav.Item icon={<ExploreIcon/>}>Explorer</Nav.Item>
-                        <Nav.Item icon={<CodeIcon/>}>GraphQL API</Nav.Item>
+                        <Nav.Item href={"/model"} icon={<ScatterIcon/>}>Model</Nav.Item>
+                        <Nav.Item href={"/explorer"} icon={<ExploreIcon/>}>Explorer</Nav.Item>
+                        <Nav.Item href={"/graphql"} icon={<CodeIcon/>}>GraphQL API</Nav.Item>
                         {/*<Nav.Item icon={<HistoryIcon/>}>History</Nav.Item>*/}
-                        <Nav.Item icon={<HistoryIcon/>}>Functions</Nav.Item>
-                        <Nav.Item icon={<HistoryIcon/>}>Views</Nav.Item>
+                        {/*<Nav.Item icon={<HistoryIcon/>}>Functions</Nav.Item>*/}
+                        {/*<Nav.Item icon={<HistoryIcon/>}>Views</Nav.Item>*/}
 
                     </Nav>
                     <Nav pullRight>
-                        <Nav.Item icon={<GearIcon/>}></Nav.Item>
+                        <Nav.Item href={"/settings"} icon={<GearIcon/>}></Nav.Item>
+                    </Nav>
+                    <Nav pullRight>
+                        <Nav.Item target={"_blank"} href={"https://docs.invana.io"} icon={<HelpOutline/>}></Nav.Item>
                     </Nav>
                     <Nav pullRight>
 

@@ -4,7 +4,7 @@ import StudioLeftSidebar from "../../layouts/sidebar-left/sidebar-left";
 import StudioHeader from "../../layouts/header/header";
 
 
-const HomeView = () => {
+const SchemaView = () => {
     const [expand, setExpand] = React.useState(true);
     return (
         <div className="show-fake-browser sidebar-page">
@@ -12,16 +12,16 @@ const HomeView = () => {
                 <StudioHeader/>
             </Container>
             <Container>
-                <StudioLeftSidebar expand={expand} setExpand={setExpand}/>
-                <Container>
+                {/*<StudioLeftSidebar expand={expand} setExpand={setExpand}/>*/}
+                {/*<Container>*/}
                     <Header>
-                        <h2>Home Title</h2>
+                        <h2>Model Title</h2>
                     </Header>
                     <Content>Content</Content>
-                </Container>
+                {/*</Container>*/}
             </Container>
         </div>
     );
 };
 
-export default HomeView;
+export default SchemaView;

@@ -4,7 +4,7 @@ import StudioLeftSidebar from "../../layouts/sidebar-left/sidebar-left";
 import StudioHeader from "../../layouts/header/header";
 
 
-const HomeView = () => {
+const Page404 = () => {
     const [expand, setExpand] = React.useState(true);
     return (
         <div className="show-fake-browser sidebar-page">
@@ -15,7 +15,7 @@ const HomeView = () => {
                 <StudioLeftSidebar expand={expand} setExpand={setExpand}/>
                 <Container>
                     <Header>
-                        <h2>Home Title</h2>
+                        <h2>Page404 Title</h2>
                     </Header>
                     <Content>Content</Content>
                 </Container>
@@ -24,4 +24,4 @@ const HomeView = () => {
     );
 };
 
-export default HomeView;
+export default Page404;
