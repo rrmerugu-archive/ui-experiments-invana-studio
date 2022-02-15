@@ -5,7 +5,7 @@ import HomeView from "./views/home/home";
 import ExploreView from "./views/explorer/explorer";
 import Page404 from "./views/page404/page404";
 import GraphQLView from "./views/graphql/graphql";
-import SchemaView from "./views/schema/schema";
+import GraphModellerView from "./views/modeller/modeller";
 import SettingsView from "./views/settings/settings";
 
 export default class App extends React.Component {
@@ -17,7 +17,7 @@ export default class App extends React.Component {
                     <Route path="/" element={<HomeView/>}/>
                     <Route path="/explorer" element={<ExploreView/>}/>
                     <Route path="/graphql" element={<GraphQLView/>}/>
-                    <Route path="/model" element={<SchemaView/>}/>
+                    <Route path="/modeller" element={<GraphModellerView/>}/>
                     <Route path="/settings" element={<SettingsView/>}/>
                     <Route element={Page404}/>
                 </Routes>

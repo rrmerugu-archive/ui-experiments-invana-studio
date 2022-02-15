@@ -18,7 +18,7 @@ const StudioHeader = () => {
                         fontSize: 24,
                         fontWeight: 'bold',
                         width: 320,
-                        height: 56,
+                        // height: 56,
                         // background: '#34c3ff',
                         color: ' #fff',
                         whiteSpace: 'nowrap',
@@ -31,7 +31,7 @@ const StudioHeader = () => {
                     <Nav>
                         {/*<Nav.Item icon={<ProjectIcon/>}>Projects</Nav.Item>*/}
                         {/*<Nav.Item icon={<ExploreIcon/>}>Marketplace</Nav.Item>*/}
-                        <Nav.Item href={"/model"} icon={<ScatterIcon/>}>Model</Nav.Item>
+                        <Nav.Item href={"/modeller"} icon={<ScatterIcon/>}>Modeller</Nav.Item>
                         <Nav.Item href={"/explorer"} icon={<ExploreIcon/>}>Explorer</Nav.Item>
                         <Nav.Item href={"/graphql"} icon={<CodeIcon/>}>GraphQL API</Nav.Item>
                         {/*<Nav.Item icon={<HistoryIcon/>}>History</Nav.Item>*/}
