@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import packageJson from '../package.json';
 
 
 export const STUDIO_ROUTES = {
@@ -21,5 +22,21 @@ export const STUDIO_ROUTES = {
     EXPLORER: "/explorer",
     FUNCTIONS: "/functions",
     GRAPHQL: "/graphql",
-    SETTINGS: "/settings"
+    SETTINGS: "/settings",
+    CONNECT: "/connect"
+}
+
+export const STUDIO_CONNECT_CONSTANTS = {
+    INVANA_ENGINE_URL: "INVANA_ENGINE_URL",
+    HTTP_HEADERS: "INVANA_HTTP_HEADERS",
+    // GRAPH_ENGINE_NAME: "INVANA_GRAPH_ENGINE_NAME",
+    // RENDERING_EDGES_SETTINGS: "INVANA_RENDERING_EDGES_SETTINGS"
+}
+
+export const STUDIO_SETTINGS = {
+    VERSION: packageJson.version,
+    ABOUT_TEXT: packageJson.description, // "Open source graph data visualiser and insights engine.",
+    REPO_URL: packageJson.repository.url,
+    HELP_LINK: "https://docs.invana.io",
+    CONNECTION_URL: localStorage.getItem(STUDIO_CONNECT_CONSTANTS.INVANA_ENGINE_URL)
 }

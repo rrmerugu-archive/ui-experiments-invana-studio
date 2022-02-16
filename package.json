@@ -1,7 +1,11 @@
 {
   "name": "invana-studio-v2",
+  "description": "Open source graph visualiser.",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "url": "https://github.com/invanalabs/invana-studio"
+  },
   "dependencies": {
     "@rsuite/icons": "^1.0.2",
     "@testing-library/jest-dom": "^5.15.0",
