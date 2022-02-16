@@ -16,7 +16,7 @@
 
 
 import React from "react";
-import {Container, Header, Content, FlexboxGrid, Panel, Form, ButtonToolbar, Button} from 'rsuite';
+import {Container, Content, FlexboxGrid, Panel, Form, ButtonToolbar, Button} from 'rsuite';
 import {STUDIO_CONNECT_CONSTANTS, STUDIO_ROUTES, STUDIO_SETTINGS} from "../../settings";
 import {setDataToLocalStorage} from "../../utils";
 
@@ -24,13 +24,13 @@ import {setDataToLocalStorage} from "../../utils";
 const ConnectView = () => {
     const [invanaEngineUrl, setInvanaEngineUrl] = React.useState("http://localhost:8200");
     const connect = () => {
+        // TODO - validate url for connectivity
         window.location.href = STUDIO_ROUTES.HOME;
         setDataToLocalStorage(STUDIO_CONNECT_CONSTANTS.INVANA_ENGINE_URL, invanaEngineUrl)
     }
     return (
         <div className="show-fake-browser login-page">
             <Container>
-
                 <Content style={{"paddingTop": "16%"}}>
                     <FlexboxGrid justify="center">
                         <FlexboxGrid.Item colspan={6}>
