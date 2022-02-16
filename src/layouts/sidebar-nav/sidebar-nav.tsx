@@ -1,16 +1,30 @@
+/*
+ * Copyright 2021 Invana
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http:www.apache.org/licenses/LICENSE-2.0
+ *  
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
 import React, {FC} from "react";
 import {Nav, Navbar, Sidebar, Sidenav, Row, Grid} from "rsuite";
-import DashboardIcon from '@rsuite/icons/Dashboard';
-import PcIcon from '@rsuite/icons/Pc';
 import ExploreIcon from "@rsuite/icons/Explore";
 import ScatterIcon from '@rsuite/icons/Scatter';
 import BranchIcon from '@rsuite/icons/Branch';
 import ArrowLeftIcon from "@rsuite/icons/ArrowLeft";
 import ArrowRightIcon from "@rsuite/icons/ArrowRight";
-import Input from 'rsuite/Input';
-import List from 'rsuite/List';
-import Col from 'rsuite/Col';
+import GearIcon from "@rsuite/icons/Gear";
 import {useLocation} from "react-router-dom";
+import {STUDIO_ROUTES} from "../../settings";
 
 
 interface StudioLeftSidebarProps {
@@ -41,7 +55,7 @@ const NavToggle: FC<NavToggleProps> = ({expand, onChange}) => {
 
 
 const StudioLeftNavSidebar: FC<StudioLeftSidebarProps> = ({expand, setExpand}) => {
-    const [activeMenu, setActiveMenu] = React.useState("/modeller");
+    const [activeMenu, setActiveMenu] = React.useState(STUDIO_ROUTES.MODELLER);
     let location = useLocation();
 
     return (
@@ -53,22 +67,25 @@ const StudioLeftNavSidebar: FC<StudioLeftSidebarProps> = ({expand, setExpand}) =
             <Sidenav expanded={expand} defaultOpenKeys={['3']} appearance="subtle">
                 <Sidenav.Body>
                     <Nav>
-                        <Nav.Item href={"/modeller"} eventKey="2" active={location.pathname === "/modeller"} icon={<BranchIcon/>}>
-                            Modeller
+                        <Nav.Item href={STUDIO_ROUTES.MODELLER} eventKey="1"
+                                  active={location.pathname === STUDIO_ROUTES.MODELLER}
+                                  icon={<BranchIcon/>}> Modeller
                         </Nav.Item>
-                        <Nav.Item href={"/explorer"} eventKey="1" active={location.pathname === "/explorer"} icon={<ScatterIcon/>}>
-                            Explorer
+                        <Nav.Item href={STUDIO_ROUTES.EXPLORER} eventKey="2"
+                                  active={location.pathname === STUDIO_ROUTES.EXPLORER}
+                                  icon={<ScatterIcon/>}> Explorer
                         </Nav.Item>
-                        <Nav.Item href={"/graphql"} eventKey="2" active={location.pathname === "/graphql"} icon={<ExploreIcon/>}>
-                            GraphQL API
+                        <Nav.Item href={STUDIO_ROUTES.GRAPHQL} eventKey="3"
+                                  active={location.pathname === STUDIO_ROUTES.GRAPHQL}
+                                  icon={<ExploreIcon/>}> GraphQL API
                         </Nav.Item>
                         {/*<Nav.Item href={"/functions"} eventKey="2" active={location.pathname === "/functions"} icon={<ExploreIcon/>}>*/}
                         {/*    Functions*/}
                         {/*</Nav.Item>*/}
-                        {/*<Nav.Item href={"/management"} eventKey="2" active={location.pathname === "/management"} icon={<ExploreIcon/>}>*/}
-                        {/*    Management*/}
-                        {/*</Nav.Item>*/}
-
+                        <Nav.Item href={STUDIO_ROUTES.SETTINGS} eventKey="4"
+                                  active={location.pathname === STUDIO_ROUTES.SETTINGS}
+                                  icon={<GearIcon/>}> Settings
+                        </Nav.Item>
                     </Nav>
                 </Sidenav.Body>
             </Sidenav>

@@ -1,3 +1,20 @@
+/*
+ * Copyright 2021 Invana
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http:www.apache.org/licenses/LICENSE-2.0
+ *  
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
 import React, {FC} from "react";
 import {Nav, Navbar, Sidebar, Sidenav, Row, Grid} from "rsuite";
 import DashboardIcon from '@rsuite/icons/Dashboard';
@@ -5,6 +22,7 @@ import PcIcon from '@rsuite/icons/Pc';
 import ExploreIcon from "@rsuite/icons/Explore";
 import ArrowLeftIcon from "@rsuite/icons/ArrowLeft";
 import ArrowRightIcon from "@rsuite/icons/ArrowRight";
+import GearIcon from "@rsuite/icons/Gear";
 import Input from 'rsuite/Input';
 import List from 'rsuite/List';
 import Col from 'rsuite/Col';
@@ -60,8 +78,7 @@ const StudioLeftSidebar: FC<StudioLeftSidebarProps> = ({expand, setExpand}) => {
                 {/*    <span style={{marginLeft: 12}}> BRAND</span>*/}
                 {/*</div>*/}
 
-                        <Input placeholder="Search Node/Relationship labels"/>
-
+                <Input placeholder="Search Node/Relationship labels"/>
 
 
             </Sidenav.Header>
@@ -86,6 +103,9 @@ const StudioLeftSidebar: FC<StudioLeftSidebarProps> = ({expand, setExpand}) => {
                         </Nav.Item>
                         <Nav.Item eventKey="2" icon={<ExploreIcon/>}>
                             Management
+                        </Nav.Item>
+                        <Nav.Item eventKey="2" icon={<GearIcon/>}>
+                            Settings
                         </Nav.Item>
 
                     </Nav>
