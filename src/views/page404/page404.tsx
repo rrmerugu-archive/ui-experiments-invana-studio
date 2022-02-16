@@ -1,23 +1,32 @@
 import React from "react";
-import {Container, Header, Content} from 'rsuite';
+import {Container, Header, Content, Row, Col} from 'rsuite';
 import StudioLeftSidebar from "../../layouts/sidebar-left/sidebar-left";
 import StudioHeader from "../../layouts/header/header";
-
+import StudioLeftNavSidebar from "../../layouts/sidebar-nav/sidebar-nav";
+import {useLocation} from "react-router-dom";
 
 const Page404 = () => {
     const [expand, setExpand] = React.useState(true);
+    let location = useLocation();
+
     return (
-        <div className="show-fake-browser sidebar-page">
+        <div className="show-container">
             <Container>
                 <StudioHeader/>
             </Container>
             <Container>
-                <StudioLeftSidebar expand={expand} setExpand={setExpand}/>
+                <StudioLeftNavSidebar expand={expand} setExpand={setExpand}/>
+
                 <Container>
+                    <Row>
+                        <Col>
                     <Header>
-                        <h2>Page404 Title</h2>
+                        <h2>404:Page not found</h2>
                     </Header>
-                    <Content>Content</Content>
+                    <Content><p>No match for <code>{location.pathname}</code></p></Content>
+
+                        </Col>
+                    </Row>
                 </Container>
             </Container>
         </div>

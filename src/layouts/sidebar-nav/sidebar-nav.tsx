@@ -3,11 +3,14 @@ import {Nav, Navbar, Sidebar, Sidenav, Row, Grid} from "rsuite";
 import DashboardIcon from '@rsuite/icons/Dashboard';
 import PcIcon from '@rsuite/icons/Pc';
 import ExploreIcon from "@rsuite/icons/Explore";
+import ScatterIcon from '@rsuite/icons/Scatter';
+import BranchIcon from '@rsuite/icons/Branch';
 import ArrowLeftIcon from "@rsuite/icons/ArrowLeft";
 import ArrowRightIcon from "@rsuite/icons/ArrowRight";
 import Input from 'rsuite/Input';
 import List from 'rsuite/List';
 import Col from 'rsuite/Col';
+import {useLocation} from "react-router-dom";
 
 
 interface StudioLeftSidebarProps {
@@ -36,57 +39,35 @@ const NavToggle: FC<NavToggleProps> = ({expand, onChange}) => {
     );
 };
 
-const data = ['Roses are red', 'Violets are blue', 'Sugar is sweet', 'And so are you'];
 
+const StudioLeftNavSidebar: FC<StudioLeftSidebarProps> = ({expand, setExpand}) => {
+    const [activeMenu, setActiveMenu] = React.useState("/modeller");
+    let location = useLocation();
 
-const StudioLeftSidebar: FC<StudioLeftSidebarProps> = ({expand, setExpand}) => {
     return (
         <Sidebar
             style={{display: 'flex', flexDirection: 'column'}}
             width={expand ? 220 : 56}
             collapsible
         >
-            <Sidenav.Header>
-                {/*<div style={{*/}
-                {/*    padding: 18,*/}
-                {/*    fontSize: 16,*/}
-                {/*    height: 56,*/}
-                {/*    // background: '#34c3ff',*/}
-                {/*    // color: ' #fff',*/}
-                {/*    whiteSpace: 'nowrap',*/}
-                {/*    overflow: 'hidden'*/}
-                {/*}}>*/}
-                {/*    <ExploreIcon style={{fontSize: 20}}/>*/}
-                {/*    <span style={{marginLeft: 12}}> BRAND</span>*/}
-                {/*</div>*/}
-
-                        <Input placeholder="Search Node/Relationship labels"/>
-
-
-
-            </Sidenav.Header>
             <Sidenav expanded={expand} defaultOpenKeys={['3']} appearance="subtle">
                 <Sidenav.Body>
-                    {/*<List>*/}
-                    {/*    {data.map((item, index) => (*/}
-                    {/*        <List.Item key={index} index={index}>*/}
-                    {/*            {item}*/}
-                    {/*        </List.Item>*/}
-                    {/*    ))}*/}
-                    {/*</List>*/}
                     <Nav>
-                        <Nav.Item eventKey="1" active icon={<ExploreIcon/>}>
-                            Dashboard
+                        <Nav.Item href={"/modeller"} eventKey="2" active={location.pathname === "/modeller"} icon={<BranchIcon/>}>
+                            Modeller
                         </Nav.Item>
-                        <Nav.Item eventKey="2" icon={<ExploreIcon/>}>
-                            Graphs
+                        <Nav.Item href={"/explorer"} eventKey="1" active={location.pathname === "/explorer"} icon={<ScatterIcon/>}>
+                            Explorer
                         </Nav.Item>
-                        <Nav.Item eventKey="2" icon={<ExploreIcon/>}>
-                            Functions
+                        <Nav.Item href={"/graphql"} eventKey="2" active={location.pathname === "/graphql"} icon={<ExploreIcon/>}>
+                            GraphQL API
                         </Nav.Item>
-                        <Nav.Item eventKey="2" icon={<ExploreIcon/>}>
-                            Management
-                        </Nav.Item>
+                        {/*<Nav.Item href={"/functions"} eventKey="2" active={location.pathname === "/functions"} icon={<ExploreIcon/>}>*/}
+                        {/*    Functions*/}
+                        {/*</Nav.Item>*/}
+                        {/*<Nav.Item href={"/management"} eventKey="2" active={location.pathname === "/management"} icon={<ExploreIcon/>}>*/}
+                        {/*    Management*/}
+                        {/*</Nav.Item>*/}
 
                     </Nav>
                 </Sidenav.Body>
@@ -96,4 +77,4 @@ const StudioLeftSidebar: FC<StudioLeftSidebarProps> = ({expand, setExpand}) => {
     )
 }
 
-export default StudioLeftSidebar;
+export default StudioLeftNavSidebar;

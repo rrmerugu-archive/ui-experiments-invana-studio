@@ -10,16 +10,16 @@ import {HelpOutline} from "@rsuite/icons";
 const StudioHeader = () => {
 
     return (
-        <Header>
+        <Header className={"top-header"}>
             <Navbar appearance="inverse">
                 <Navbar.Header>
                     <a className="navbar-brand logo" href={"/"} style={{
                         padding: 8,
                         fontSize: 24,
                         fontWeight: 'bold',
-                        width: 320,
+                        width: 220,
                         // height: 56,
-                        // background: '#34c3ff',
+
                         color: ' #fff',
                         whiteSpace: 'nowrap',
                         overflow: 'hidden',
@@ -31,9 +31,9 @@ const StudioHeader = () => {
                     <Nav>
                         {/*<Nav.Item icon={<ProjectIcon/>}>Projects</Nav.Item>*/}
                         {/*<Nav.Item icon={<ExploreIcon/>}>Marketplace</Nav.Item>*/}
-                        <Nav.Item href={"/modeller"} icon={<ScatterIcon/>}>Modeller</Nav.Item>
-                        <Nav.Item href={"/explorer"} icon={<ExploreIcon/>}>Explorer</Nav.Item>
-                        <Nav.Item href={"/graphql"} icon={<CodeIcon/>}>GraphQL API</Nav.Item>
+                        {/*<Nav.Item href={"/modeller"} icon={<ScatterIcon/>}>Modeller</Nav.Item>*/}
+                        {/*<Nav.Item href={"/explorer"} icon={<ExploreIcon/>}>Explorer</Nav.Item>*/}
+                        {/*<Nav.Item href={"/graphql"} icon={<CodeIcon/>}>GraphQL API</Nav.Item>*/}
                         {/*<Nav.Item icon={<HistoryIcon/>}>History</Nav.Item>*/}
                         {/*<Nav.Item icon={<HistoryIcon/>}>Functions</Nav.Item>*/}
                         {/*<Nav.Item icon={<HistoryIcon/>}>Views</Nav.Item>*/}

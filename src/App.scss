@@ -18,10 +18,33 @@ button {
   top: 10px !important;
 }
 
+.navbar-brand.logo:hover {
+  text-decoration: none;
+
+}
+
+header.top-header {
+  background: #3b3b3b
+}
+
 .rs-navbar-header {
   height: 45px !important;
 
   .navbar-brand {
     padding: 2px 15px !important;
   }
+}
+
+.rs-sidebar {
+  height: calc(100vh - 45px);
+  z-index: 3;
+  background-color: #dcdcdc;
+
+  .rs-sidenav {
+    height: calc(100vh - 45px - 46px);
+  }
+}
+
+.nav-toggle {
+  border-top: 1px solid #eee;
 }
