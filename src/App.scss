@@ -15,7 +15,6 @@
  */
 
 
-
 body {
   background-color: #efefef
 }
@@ -65,4 +64,13 @@ header.top-header {
 
 .nav-toggle {
   border-top: 1px solid #eee;
+}
+
+.rs-header {
+  background: #c4c4c4;
+
+  .rs-breadcrumb {
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
 }

@@ -17,7 +17,6 @@
 
 import React from "react";
 import {Container, Header, Content, Row, Col} from 'rsuite';
-import StudioLeftSidebar from "../../layouts/sidebar-left/sidebar-left";
 import StudioHeader from "../../layouts/header/header";
 import StudioLeftNavSidebar from "../../layouts/sidebar-nav/sidebar-nav";
 import {useLocation} from "react-router-dom";

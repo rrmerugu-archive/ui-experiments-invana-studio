@@ -20,11 +20,27 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import 'rsuite/styles/index.less'; // or 'rsuite/dist/rsuite.min.css'
+import 'rsuite/styles/index.less';
+
+import {
+    ApolloClient,
+    InMemoryCache,
+    ApolloProvider,
+    useQuery,
+    gql
+} from "@apollo/client";
+import {STUDIO_SETTINGS} from "./settings";
+
+const client = new ApolloClient({
+    uri: STUDIO_SETTINGS.CONNECTION_URL + "/graphql",
+    cache: new InMemoryCache()
+});
 
 ReactDOM.render(
     <React.StrictMode>
-        <App/>
+        <ApolloProvider client={client}>
+            <App/>
+        </ApolloProvider>
     </React.StrictMode>,
     document.getElementById('root')
 );
