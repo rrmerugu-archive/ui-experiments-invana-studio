@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  *
  * http:www.apache.org/licenses/LICENSE-2.0
- *  
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,73 +16,110 @@
 
 
 import React from "react";
-import {Container, Header, Content, Breadcrumb} from 'rsuite';
+import {Container, Header, Content, Breadcrumb, Loader} from 'rsuite';
 import StudioHeader from "../../layouts/header/header";
 import StudioLeftNavSidebar from "../../layouts/sidebar-nav/sidebar-nav";
 import {gql, useQuery} from '@apollo/client';
-import {getAllEdgesModelsQuery} from "../../queries/modeller";
+import {GET_SCHEMA_QUERY} from "../../queries/modeller";
 import CanvasArtBoard from "../../graph/canvas-artboard";
 import {STUDIO_ROUTES} from "../../settings";
+import defaultOptions from "../../graph/networkOptions";
 
 
-// create an array with nodes
-var nodes = [
-    {id: 1, label: "Node 1"},
-    {id: 2, label: "Node 2"},
-    {id: 3, label: "Node 3"},
-    {id: 4, label: "Node 4"},
-    {id: 5, label: "Node 5"},
-];
+// export const physicsSettings = {
+//
+//     forceAtlas2Based: {
+//         gravitationalConstant: -56,
+//         centralGravity: 0.005,
+//         springLength: STUDIO_SETTINGS.RENDERING_EDGES_SETTINGS.length,
+//         springConstant: 0.18,
+//         avoidOverlap: 1.5
+//     },
+//     maxVelocity: 146,
+//     solver: 'forceAtlas2Based',
+//     timestep: 0.35,
+//     stabilization: {
+//         enabled: true,
+//         iterations: 1000,
+//         updateInterval: 50,
+//         // fit: true
+//     }
+//
+// }
+// const defaultOptions = {
+//     physics: physicsSettings,
+//
+//     autoResize: true,
+//     edges: {
+//         smooth: false,
+//         color: "#000000",
+//         width: 0.5,
+//         arrows: {
+//             to: {
+//                 enabled: true,
+//                 scaleFactor: 0.5,
+//             },
+//         },
+//         chosen: {
+//             edge: function (values: any, id: string, selected: any, hovering: any) {
+//                 console.log("=====", id, selected, hovering);
+//                 values.width = values.width * 1.5;
+//             }
+//         },
+//         selectionWidth: function (width: any) {
+//             return width * 1.2;
+//         },
+//         // hoverWidth: function (width) {
+//         //     return width * 1.4;
+//         // }
+//         hoverWidth: function (width: any) {
+//             return width + 1;
+//         },
+//     },
+//     nodes: {
+//         // physics: false,
+//         shape: "dot",
+//         // size: 10,
+//         scaling: {
+//             min: 10,
+//             max: 10,
+//         },
+//         shapeProperties: {
+//             interpolation: true    // 'true' for intensive zooming
+//         }
+//     }
+// };
 
-// create an array with edges
-var edges = [
-    {from: 1, to: 3},
-    {from: 1, to: 2},
-    {from: 2, to: 4},
-    {from: 2, to: 5},
-    {from: 3, to: 3},
-];
 
-// create a network
-var graphData = {
-    nodes: nodes,
-    edges: edges,
-};
-const defaultOptions = {
-    physics: {
-        stabilization: false,
-    },
-    autoResize: true,
-    edges: {
-        smooth: false,
-        color: "#000000",
-        width: 0.5,
-        arrows: {
-            to: {
-                enabled: true,
-                scaleFactor: 0.5,
-            },
-        },
-    },
-    nodes: {
-        // physics: false,
-        shape: "dot",
-        // size: 10,
-        scaling: {
-            min: 10,
-            max: 10,
-        },
-        shapeProperties: {
-            interpolation: true    // 'true' for intensive zooming
-        }
-    }
-};
+const convertResponseToVisJsData = (responseData: any) => {
+    console.log("responseData", responseData);
+    let allEdgesModels: any = [];
+    let allVertexModels: any = [];
+    responseData.getAllVertexModels.map((model: any, index: any) => {
+        allVertexModels.push({id: model.name, label: model.name,})
+    })
+
+    responseData.getAllEdgesModels.map((model: any, index: any) => {
+        model.linkPaths.map((linkPath: any, index: any) => {
+            allEdgesModels.push({
+                id: model.name + "-" + linkPath.outvLabel + "-" + linkPath.invLabel,
+                label: model.name, from: linkPath.outvLabel, to: linkPath.invLabel
+            })
+        })
+    })
+    return {nodes: allVertexModels, edges: allEdgesModels}
+
+}
 const GraphModellerView = () => {
     const [expand, setExpand] = React.useState(true);
-    const {loading, error, data} = useQuery(getAllEdgesModelsQuery);
-    if (loading) return <p>Loading...</p>;
+    const {loading, error, data} = useQuery(GET_SCHEMA_QUERY);
+    // if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
-
+    let graphData = {nodes: [], edges: []};
+    if (!loading) {
+        graphData = convertResponseToVisJsData(data);
+    }
+    console.log("====graphData", graphData)
     return (
         <div className="show-fake-browser sidebar-page">
             <Container>
@@ -92,24 +129,18 @@ const GraphModellerView = () => {
                 <StudioLeftNavSidebar expand={expand} setExpand={setExpand}/>
                 <Container>
                     <Header>
-                        {/*<h2>Graph Modeller</h2>*/}
                         <Breadcrumb>
-                            <Breadcrumb.Item href={STUDIO_ROUTES.HOME}>Home</Breadcrumb.Item>
-                            <Breadcrumb.Item href={STUDIO_ROUTES.MODELLER} active>Graph Modeller</Breadcrumb.Item>
-                            {/*<Breadcrumb.Item active>Breadcrumb</Breadcrumb.Item>*/}
+                            {/*<Breadcrumb.Item href={STUDIO_ROUTES.HOME}>Home</Breadcrumb.Item>*/}
+                            <Breadcrumb.Item href={STUDIO_ROUTES.MODELLER} active><strong>GRAPH
+                                MODELLER</strong></Breadcrumb.Item>
                         </Breadcrumb>
                     </Header>
                     <Content>
-                        {/*indexes, labels, properties, strategies*/}
-                        {/*{*/}
-                        {/*    data.getAllEdgesModels.map((item: any, index: any) => (*/}
-                        {/*        <Panel key={index}>*/}
-                        {/*            <p>*/}
-                        {/*                {JSON.stringify(item)}: {index}*/}
-                        {/*            </p>*/}
-                        {/*        </Panel>*/}
-                        {/*    ))*/}
-                        {/*}*/}
+                        {loading ? (
+                            <Loader backdrop content="loading..." vertical/>
+                        ) : (
+                            <span></span>
+                        )}
                         <CanvasArtBoard containerId={"artboard-1"} data={graphData} options={defaultOptions}/>
 
                     </Content>

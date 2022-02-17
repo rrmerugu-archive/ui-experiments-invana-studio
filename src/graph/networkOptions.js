@@ -22,6 +22,7 @@ export const physicsSettings = {
     forceAtlas2Based: {
         gravitationalConstant: -56,
         centralGravity: 0.005,
+        springLength: 180,
         // springLength: STUDIO_SETTINGS.RENDERING_EDGES_SETTINGS.length,
         springConstant: 0.18,
         avoidOverlap: 1.5

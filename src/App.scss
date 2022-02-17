@@ -54,11 +54,15 @@ header.top-header {
 
 .rs-sidebar {
   height: calc(100vh - 45px);
-  z-index: 3;
+  //z-index: 3;
   background-color: #dcdcdc;
 
   .rs-sidenav {
     height: calc(100vh - 45px - 46px);
+  }
+
+  .rs-sidenav-item {
+    //border-bottom: 1px solid #ccc;
   }
 }
 
@@ -73,4 +77,8 @@ header.top-header {
     margin-bottom: 5px;
     margin-top: 5px;
   }
+}
+
+.rs-loader-wrapper {
+  z-index: 3;
 }

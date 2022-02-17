@@ -17,7 +17,7 @@
 import {gql} from "@apollo/client";
 
 
-export const getAllEdgesModelsQuery = gql`
+export const GET_SCHEMA_QUERY = gql`
   query {
       getAllEdgesModels{
         name
@@ -32,6 +32,16 @@ export const getAllEdgesModelsQuery = gql`
         linkPaths{
           outvLabel
           invLabel
+        }
+      }
+      getAllVertexModels{
+        name
+        partitioned
+        static
+        properties{
+          name
+          cardinality
+          type
         }
       }
   }
