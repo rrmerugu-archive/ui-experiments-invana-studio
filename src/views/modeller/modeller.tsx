@@ -16,17 +16,15 @@
 
 
 import React from "react";
-import {Container, Header, Content, Breadcrumb, Nav, Loader} from 'rsuite';
+import {Container, Header, Content, Nav, Loader} from 'rsuite';
 import StudioHeader from "../../layouts/header/header";
 import StudioLeftNavSidebar from "../../layouts/sidebar-nav/sidebar-nav";
-import {gql, useQuery} from '@apollo/client';
+import {useQuery} from '@apollo/client';
 import {GET_SCHEMA_QUERY} from "../../queries/modeller";
 import CanvasArtBoard from "../../graph/canvas-artboard";
-import {STUDIO_ROUTES} from "../../settings";
 import defaultOptions from "../../graph/networkOptions";
 import NetworkErrorUI from "../../components/networkError";
 import {GraphCanvasCtrl} from "../../graph/canvas-ctrl";
-import {GraphDataType} from "../../graph/types";
 
 
 const convertModelDataToVisJsData = (responseData: any) => {
@@ -69,7 +67,7 @@ const GraphModellerView = () => {
     }
 
     function updateData() {
-        console.log("updateData++",renderCanvas,  canvasCtrl, )
+        console.log("updateData++", renderCanvas, canvasCtrl,)
         const rand = getRndInteger(1, 1000);
         canvasCtrl.addNewData([{id: "yolo-" + rand, label: "yolo-" + rand}], []);
         setRenderCanvas(true);
@@ -87,7 +85,7 @@ const GraphModellerView = () => {
                 <Container>
                     <Header>
                         <Nav activeKey={"home"}>
-                            <Nav.Item eventKey="home" onClick={() => updateData()}>Home</Nav.Item>
+                            <Nav.Item eventKey="home" onClick={() => updateData()}>Add data</Nav.Item>
                             <Nav.Item eventKey="news">News</Nav.Item>
                             <Nav.Item eventKey="solutions">Solutions</Nav.Item>
                             <Nav.Item eventKey="products">Products</Nav.Item>
@@ -97,9 +95,7 @@ const GraphModellerView = () => {
                     <Content>
                         {loading ? (
                             <Loader backdrop content="Fetching schema model ..." vertical/>
-                        ) : (
-                            <span></span>
-                        )}
+                        ) : (<span></span>)}
                         <CanvasArtBoard
                             containerId={"artboard-1"}
                             renderCanvas={renderCanvas}

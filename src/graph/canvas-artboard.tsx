@@ -60,7 +60,8 @@ class CanvasArtBoard extends React.Component<CanvasArtBoardProps, {}> {
 
     shouldComponentUpdate() {
         console.log("===shouldComponentUpdate", this.props.renderCanvas)
-        return this.props.renderCanvas;
+        return true
+        // return this.props.renderCanvas;
     }
 
 
