@@ -25,6 +25,7 @@ import CanvasArtBoard from "../../graph/canvas-artboard";
 import defaultOptions from "../../graph/networkOptions";
 import NetworkErrorUI from "../../components/networkError";
 import {GraphCanvasCtrl} from "../../graph/canvas-ctrl";
+import GenerateEvents from "../../graph/events";
 
 
 const convertModelDataToVisJsData = (responseData: any) => {
@@ -47,13 +48,12 @@ const convertModelDataToVisJsData = (responseData: any) => {
 
 }
 
-const events = {}
-
 
 const GraphModellerView = () => {
     const [expand, setExpand] = React.useState(false);
     const canvasCtrl: GraphCanvasCtrl = new GraphCanvasCtrl();
     const [renderCanvas, setRenderCanvas] = React.useState<boolean>(false);
+    const events = GenerateEvents()
 
     const {loading, error, data} = useQuery(GET_SCHEMA_QUERY);
     if (error) return <NetworkErrorUI error={error}/>;

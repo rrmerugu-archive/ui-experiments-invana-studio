@@ -17,6 +17,10 @@
 
 const GenerateEvents = () => {
 
+    return {
+
+    }
+
     // return {
     //     click: function (params) {
     //         params.event = "[original event]";
