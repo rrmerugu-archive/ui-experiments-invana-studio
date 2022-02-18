@@ -30,9 +30,15 @@ export class GraphCanvasCtrl {
     }
 
     setNetwork(network: Network) {
-        console.log("this.setNetwork", this)
         this.network = network;
         this.setupNetworkEvents();
+    }
+
+    updateNetworkData() {
+        if (this.network) {
+            this.network.body.data.nodes.update(this.nodes)
+            this.network.body.data.edges.update(this.edges)
+        }
     }
 
     addNewData(nodes: Array<any>, edges: Array<any>) {
@@ -40,10 +46,8 @@ export class GraphCanvasCtrl {
         console.log("addNewData", nodes, edges);
         this.nodes = this.nodes.concat(nodes)
         this.edges = this.edges.concat(edges)
-    }
+        this.updateNetworkData()
 
-    setReRender(renderState: boolean) {
-        this.shallReRender = renderState;
     }
 
 

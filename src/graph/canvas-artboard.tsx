@@ -15,26 +15,11 @@
  */
 import React from "react";
 import Graph from "./visjs-react";
-import {GraphCanvasCtrl} from "./canvas-ctrl";
 import {CanvasArtBoardProps} from "./types";
 
 
 class CanvasArtBoard extends React.Component<CanvasArtBoardProps, {}> {
 
-
-    // constructor(props: any) {
-    //     super(props);
-    // }
-
-    // componentDidUpdate(prevProps: Readonly<CanvasArtBoardProps>, prevState: Readonly<{}>, snapshot?: any) {
-    //     console.log("artboard componentDidUpdate")
-    //     // this.procanvasCtrl.addNewData(this.props.newData.nodes, this.props.newData.edges)
-    // }
-    //
-    // shouldComponentUpdate(nextProps: Readonly<CanvasArtBoardProps>, nextState: Readonly<{}>, nextContext: any): boolean {
-    //     console.log("nextProps", nextProps)
-    //     // return false;
-    // }
 
     // static propTypes = {
     //     elementId: PropTypes.string,
@@ -50,35 +35,13 @@ class CanvasArtBoard extends React.Component<CanvasArtBoardProps, {}> {
     //     // hiddenEdgeLabels: PropTypes.array
     // }
 
-    componentDidUpdate(prevProps: Readonly<CanvasArtBoardProps>, prevState: Readonly<{}>, snapshot?: any) {
-        // if (this.props.canvasCtrl.shallReRender) {
-        console.log("===componentDidUpdate renderCanvas",this.props.renderCanvas );
-        this.props.setRenderCanvas(false)
-
-        // }
-    }
-
-    shouldComponentUpdate() {
-        console.log("===shouldComponentUpdate", this.props.renderCanvas)
-        return true
-        // return this.props.renderCanvas;
-    }
-
-
-    // setNetwork(network) {
-    //     this.props.setNetwork(network)
-    //     this.network = network;
-    // }
 
     render() {
-        // console.log("=====defaultOptions", JSON.stringify(this.props.newData));
-        const data = this.props.canvasCtrl.getData()
-        console.log("=====getData+++++++++", data)
         return (
             <div className={"canvasContainer w-100 h-100"}>
                 <Graph
                     containerId={this.props.containerId}
-                    data={data}
+                    data={this.props.canvasCtrl.getData()}
                     options={this.props.options}
                     events={this.props.events}
                     getNetwork={(network) => this.props.canvasCtrl.setNetwork(network)}

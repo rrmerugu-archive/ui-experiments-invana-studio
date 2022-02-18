@@ -53,7 +53,7 @@ const events = {}
 const GraphModellerView = () => {
     const [expand, setExpand] = React.useState(false);
     const canvasCtrl: GraphCanvasCtrl = new GraphCanvasCtrl();
-    const [renderCanvas, setRenderCanvas] = React.useState<boolean>(true);
+    const [renderCanvas, setRenderCanvas] = React.useState<boolean>(false);
 
     const {loading, error, data} = useQuery(GET_SCHEMA_QUERY);
     if (error) return <NetworkErrorUI error={error}/>;
@@ -66,15 +66,11 @@ const GraphModellerView = () => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    function updateData() {
-        console.log("updateData++", renderCanvas, canvasCtrl,)
+    function addNewData() {
         const rand = getRndInteger(1, 1000);
         canvasCtrl.addNewData([{id: "yolo-" + rand, label: "yolo-" + rand}], []);
-        setRenderCanvas(true);
-        console.log("updateData, getData ++", canvasCtrl.getData());
     }
 
-    console.log("====getData  modeller ++", canvasCtrl.getData())
     return (
         <div className="show-fake-browser sidebar-page">
             <Container>
@@ -85,7 +81,7 @@ const GraphModellerView = () => {
                 <Container>
                     <Header>
                         <Nav activeKey={"home"}>
-                            <Nav.Item eventKey="home" onClick={() => updateData()}>Add data</Nav.Item>
+                            <Nav.Item eventKey="home" onClick={() => addNewData()}>Add data</Nav.Item>
                             <Nav.Item eventKey="news">News</Nav.Item>
                             <Nav.Item eventKey="solutions">Solutions</Nav.Item>
                             <Nav.Item eventKey="products">Products</Nav.Item>
@@ -104,7 +100,6 @@ const GraphModellerView = () => {
                             events={events}
                             canvasCtrl={canvasCtrl}
                         />
-
                     </Content>
                 </Container>
             </Container>
