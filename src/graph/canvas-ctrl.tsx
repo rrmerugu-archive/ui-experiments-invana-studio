@@ -19,6 +19,8 @@ export class GraphCanvasCtrl {
     network: any = null;
     nodes: Array<any> = [];
     edges: Array<any> = []
+    shallReRender: boolean = true
+
 
     constructor() {
         this.nodes = [];
@@ -39,6 +41,11 @@ export class GraphCanvasCtrl {
         this.nodes = this.nodes.concat(nodes)
         this.edges = this.edges.concat(edges)
     }
+
+    setReRender(renderState: boolean) {
+        this.shallReRender = renderState;
+    }
+
 
     getData() {
         return {nodes: this.nodes, edges: this.edges}

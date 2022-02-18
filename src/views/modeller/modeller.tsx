@@ -26,6 +26,7 @@ import {STUDIO_ROUTES} from "../../settings";
 import defaultOptions from "../../graph/networkOptions";
 import NetworkErrorUI from "../../components/networkError";
 import {GraphCanvasCtrl} from "../../graph/canvas-ctrl";
+import {GraphDataType} from "../../graph/types";
 
 
 const convertModelDataToVisJsData = (responseData: any) => {
@@ -49,32 +50,33 @@ const convertModelDataToVisJsData = (responseData: any) => {
 }
 
 const events = {}
+
+
 const GraphModellerView = () => {
     const [expand, setExpand] = React.useState(false);
     const canvasCtrl: GraphCanvasCtrl = new GraphCanvasCtrl();
-    // const [canvasCtrl, setCanvasCtrl] = React.useState(null);
+    const [renderCanvas, setRenderCanvas] = React.useState<boolean>(true);
 
     const {loading, error, data} = useQuery(GET_SCHEMA_QUERY);
-    // if (loading) return <p>Loading...</p>;
     if (error) return <NetworkErrorUI error={error}/>;
-    let graphData = {nodes: [], edges: []};
     if (!loading) {
-        graphData = convertModelDataToVisJsData(data);
-        canvasCtrl.addNewData(graphData.nodes, graphData.edges);
-        const data__ = canvasCtrl.getData();
-        console.log("data__", data__)
+        const graphDataConverted = convertModelDataToVisJsData(data);
+        canvasCtrl.addNewData(graphDataConverted.nodes, graphDataConverted.edges);
+    }
 
+    function getRndInteger(min: any, max: any) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     function updateData() {
-        console.log("updateData", canvasCtrl)
-        // {id: model.name, label: model.name,}
-        if (canvasCtrl) {
-            canvasCtrl.addNewData([{id: "yolo", label: "yolo",}], []);
-        }
+        console.log("updateData++",renderCanvas,  canvasCtrl, )
+        const rand = getRndInteger(1, 1000);
+        canvasCtrl.addNewData([{id: "yolo-" + rand, label: "yolo-" + rand}], []);
+        setRenderCanvas(true);
+        console.log("updateData, getData ++", canvasCtrl.getData());
     }
 
-    console.log("====getData  modeller", canvasCtrl.getData())
+    console.log("====getData  modeller ++", canvasCtrl.getData())
     return (
         <div className="show-fake-browser sidebar-page">
             <Container>
@@ -84,11 +86,6 @@ const GraphModellerView = () => {
                 <StudioLeftNavSidebar expand={expand} setExpand={setExpand}/>
                 <Container>
                     <Header>
-                        {/*<Breadcrumb>*/}
-                        {/*    /!*<Breadcrumb.Item href={STUDIO_ROUTES.HOME}>Home</Breadcrumb.Item>*!/*/}
-                        {/*    <Breadcrumb.Item href={STUDIO_ROUTES.MODELLER} active><strong>GRAPH*/}
-                        {/*        MODELLER</strong></Breadcrumb.Item>*/}
-                        {/*</Breadcrumb>*/}
                         <Nav activeKey={"home"}>
                             <Nav.Item eventKey="home" onClick={() => updateData()}>Home</Nav.Item>
                             <Nav.Item eventKey="news">News</Nav.Item>
@@ -105,7 +102,8 @@ const GraphModellerView = () => {
                         )}
                         <CanvasArtBoard
                             containerId={"artboard-1"}
-                            newData={graphData}
+                            renderCanvas={renderCanvas}
+                            setRenderCanvas={setRenderCanvas}
                             options={defaultOptions}
                             events={events}
                             canvasCtrl={canvasCtrl}
