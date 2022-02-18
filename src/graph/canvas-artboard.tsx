@@ -23,20 +23,30 @@ type GraphDataType = {
     edges: Array<any>;
 }
 
-class CanvasArtBoard extends React.Component<{
-    newData: GraphDataType, containerId: string,
-    options: object, events: object,
-    getCanvasCtrl: object
-}, {}> {
+type CanvasArtBoardProps = {
+    newData: GraphDataType,
+    canvasCtrl: GraphCanvasCtrl,
+    containerId: string,
+    options: object,
+    events: object,
+}
 
-    private canvasCtrl: GraphCanvasCtrl;
+class CanvasArtBoard extends React.Component<CanvasArtBoardProps, {}> {
 
-    constructor(props: any) {
-        super(props);
-        this.canvasCtrl = new GraphCanvasCtrl({})
-        props.getCanvasCtrl(this.canvasCtrl);
-        this.canvasCtrl.addNewData(this.props.newData.nodes, this.props.newData.edges)
-    }
+
+    // constructor(props: any) {
+    //     super(props);
+    // }
+
+    // componentDidUpdate(prevProps: Readonly<CanvasArtBoardProps>, prevState: Readonly<{}>, snapshot?: any) {
+    //     console.log("artboard componentDidUpdate")
+    //     // this.procanvasCtrl.addNewData(this.props.newData.nodes, this.props.newData.edges)
+    // }
+    //
+    // shouldComponentUpdate(nextProps: Readonly<CanvasArtBoardProps>, nextState: Readonly<{}>, nextContext: any): boolean {
+    //     console.log("nextProps", nextProps)
+    //     // return false;
+    // }
 
     // static propTypes = {
     //     elementId: PropTypes.string,
@@ -64,17 +74,17 @@ class CanvasArtBoard extends React.Component<{
     // }
 
     render() {
-        console.log("=====defaultOptions", JSON.stringify(this.props.newData));
-        const newData = this.canvasCtrl.getData()
+        // console.log("=====defaultOptions", JSON.stringify(this.props.newData));
+        const newData = this.props.canvasCtrl.getData()
         console.log("=====getData", newData)
         return (
             <div className={"canvasContainer w-100 h-100"}>
                 <Graph
                     containerId={this.props.containerId}
-                    data={this.props.newData}
+                    data={this.props.canvasCtrl.getData()}
                     options={this.props.options}
                     events={this.props.events}
-                    getNetwork={(network) => this.canvasCtrl.setNetwork(network)}
+                    getNetwork={(network) => this.props.canvasCtrl.setNetwork(network)}
                     // getNodes={this.props.getNodes}
                     // getEdges={this.props.getEdges}
                     // getNodes={getNodes}

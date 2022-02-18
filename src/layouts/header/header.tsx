@@ -18,11 +18,11 @@
 import {Header, Nav, Navbar, Dropdown} from "rsuite";
 import ProjectIcon from "@rsuite/icons/Project";
 import GearIcon from "@rsuite/icons/Gear";
-import ExploreIcon from "@rsuite/icons/Explore";
-import CodeIcon from '@rsuite/icons/Code';
+// import ExploreIcon from "@rsuite/icons/Explore";
+// import CodeIcon from '@rsuite/icons/Code';
 import React from "react";
-import HistoryIcon from '@rsuite/icons/History';
-import ScatterIcon from '@rsuite/icons/Scatter';
+// import HistoryIcon from '@rsuite/icons/History';
+// import ScatterIcon from '@rsuite/icons/Scatter';
 import {HelpOutline} from "@rsuite/icons";
 import {STUDIO_ROUTES} from "../../settings";
 

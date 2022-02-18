@@ -25,6 +25,7 @@ import CanvasArtBoard from "../../graph/canvas-artboard";
 import {STUDIO_ROUTES} from "../../settings";
 import defaultOptions from "../../graph/networkOptions";
 import NetworkErrorUI from "../../components/networkError";
+import {GraphCanvasCtrl} from "../../graph/canvas-ctrl";
 
 
 const convertModelDataToVisJsData = (responseData: any) => {
@@ -50,7 +51,8 @@ const convertModelDataToVisJsData = (responseData: any) => {
 const events = {}
 const GraphModellerView = () => {
     const [expand, setExpand] = React.useState(false);
-    const [canvasCtrl, setCanvasCtrl] = React.useState(null);
+    const canvasCtrl: GraphCanvasCtrl = new GraphCanvasCtrl();
+    // const [canvasCtrl, setCanvasCtrl] = React.useState(null);
 
     const {loading, error, data} = useQuery(GET_SCHEMA_QUERY);
     // if (loading) return <p>Loading...</p>;
@@ -58,17 +60,21 @@ const GraphModellerView = () => {
     let graphData = {nodes: [], edges: []};
     if (!loading) {
         graphData = convertModelDataToVisJsData(data);
+        canvasCtrl.addNewData(graphData.nodes, graphData.edges);
+        const data__ = canvasCtrl.getData();
+        console.log("data__", data__)
+
     }
 
     function updateData() {
-        console.log("addnewData", canvasCtrl)
+        console.log("updateData", canvasCtrl)
         // {id: model.name, label: model.name,}
         if (canvasCtrl) {
-            // canvasCtrl.addNewData([{id: "yolo", label: "yolo",}], []);
+            canvasCtrl.addNewData([{id: "yolo", label: "yolo",}], []);
         }
     }
 
-    console.log("====graphData", graphData)
+    console.log("====getData  modeller", canvasCtrl.getData())
     return (
         <div className="show-fake-browser sidebar-page">
             <Container>
@@ -102,7 +108,7 @@ const GraphModellerView = () => {
                             newData={graphData}
                             options={defaultOptions}
                             events={events}
-                            getCanvasCtrl={setCanvasCtrl}
+                            canvasCtrl={canvasCtrl}
                         />
 
                     </Content>

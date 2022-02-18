@@ -20,8 +20,7 @@ export class GraphCanvasCtrl {
     nodes: Array<any> = [];
     edges: Array<any> = []
 
-    constructor(props: any) {
-        this.network = null;
+    constructor() {
         this.nodes = [];
         this.edges = [];
         // this.network.body.data.nodes.update(nodesPrepared)
@@ -37,8 +36,8 @@ export class GraphCanvasCtrl {
     addNewData(nodes: Array<any>, edges: Array<any>) {
         //TODO -  fix deduping issue later
         console.log("addNewData", nodes, edges);
-        this.nodes.concat(nodes)
-        this.edges.concat(edges)
+        this.nodes = this.nodes.concat(nodes)
+        this.edges = this.edges.concat(edges)
     }
 
     getData() {
