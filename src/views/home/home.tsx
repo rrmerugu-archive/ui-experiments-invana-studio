@@ -22,7 +22,7 @@ import StudioLeftNavSidebar from "../../layouts/sidebar-nav/sidebar-nav";
 
 
 const HomeView = () => {
-    const [expand, setExpand] = React.useState(true);
+    const [expand, setExpand] = React.useState(false);
     return (
         <div className=" ">
             <Container>

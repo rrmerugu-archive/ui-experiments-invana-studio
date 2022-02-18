@@ -23,7 +23,7 @@ import "./explorer.scss";
 import StudioLeftNavSidebar from "../../layouts/sidebar-nav/sidebar-nav";
 
 const ExploreView = () => {
-    const [expand, setExpand] = React.useState(true);
+    const [expand, setExpand] = React.useState(false);
     return (
         <div className="show-fake-browser sidebar-page">
             <Container>

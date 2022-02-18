@@ -22,7 +22,7 @@ import StudioHeader from "../../layouts/header/header";
 
 
 const SettingsView = () => {
-    const [expand, setExpand] = React.useState(true);
+    const [expand, setExpand] = React.useState(false);
     return (
         <div className=" ">
             <Container>

@@ -103,7 +103,7 @@ const defaultOptions = {
         // ...STUDIO_SETTINGS.RENDERING_EDGES_SETTINGS,
         chosen: {
             edge: function (values, id, selected, hovering) {
-                console.log("=====", id, selected, hovering);
+                // console.log("=====", id, selected, hovering);
                 values.width = values.width * 1.5;
             }
         },

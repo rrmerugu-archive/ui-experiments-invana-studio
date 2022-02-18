@@ -77,7 +77,7 @@ const StudioLeftNavSidebar: FC<StudioLeftSidebarProps> = ({expand, setExpand}) =
                         </Nav.Item>
                         <Nav.Item href={STUDIO_ROUTES.GRAPHQL} eventKey="3"
                                   active={location.pathname === STUDIO_ROUTES.GRAPHQL}
-                                  icon={<ExploreIcon/>}> GraphQL API
+                                  icon={<ExploreIcon/>}> APIs
                         </Nav.Item>
                         {/*<Nav.Item href={"/functions"} eventKey="2" active={location.pathname === "/functions"} icon={<ExploreIcon/>}>*/}
                         {/*    Functions*/}

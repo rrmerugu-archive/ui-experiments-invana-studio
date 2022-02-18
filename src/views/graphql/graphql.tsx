@@ -23,7 +23,7 @@ import StudioLeftNavSidebar from "../../layouts/sidebar-nav/sidebar-nav";
 
 
 const GraphQLView = () => {
-    const [expand, setExpand] = React.useState(true);
+    const [expand, setExpand] = React.useState(false);
     return (
         <div className="sidebar-page">
             <Container>

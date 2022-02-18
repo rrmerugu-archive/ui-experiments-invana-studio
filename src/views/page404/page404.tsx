@@ -22,7 +22,7 @@ import StudioLeftNavSidebar from "../../layouts/sidebar-nav/sidebar-nav";
 import {useLocation} from "react-router-dom";
 
 const Page404 = () => {
-    const [expand, setExpand] = React.useState(true);
+    const [expand, setExpand] = React.useState(false);
     let location = useLocation();
 
     return (

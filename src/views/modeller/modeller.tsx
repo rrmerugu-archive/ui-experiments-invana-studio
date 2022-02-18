@@ -16,7 +16,7 @@
 
 
 import React from "react";
-import {Container, Header, Content, Breadcrumb, Loader} from 'rsuite';
+import {Container, Header, Content, Breadcrumb, Nav, Loader} from 'rsuite';
 import StudioHeader from "../../layouts/header/header";
 import StudioLeftNavSidebar from "../../layouts/sidebar-nav/sidebar-nav";
 import {gql, useQuery} from '@apollo/client';
@@ -24,74 +24,10 @@ import {GET_SCHEMA_QUERY} from "../../queries/modeller";
 import CanvasArtBoard from "../../graph/canvas-artboard";
 import {STUDIO_ROUTES} from "../../settings";
 import defaultOptions from "../../graph/networkOptions";
+import NetworkErrorUI from "../../components/networkError";
 
 
-// export const physicsSettings = {
-//
-//     forceAtlas2Based: {
-//         gravitationalConstant: -56,
-//         centralGravity: 0.005,
-//         springLength: STUDIO_SETTINGS.RENDERING_EDGES_SETTINGS.length,
-//         springConstant: 0.18,
-//         avoidOverlap: 1.5
-//     },
-//     maxVelocity: 146,
-//     solver: 'forceAtlas2Based',
-//     timestep: 0.35,
-//     stabilization: {
-//         enabled: true,
-//         iterations: 1000,
-//         updateInterval: 50,
-//         // fit: true
-//     }
-//
-// }
-// const defaultOptions = {
-//     physics: physicsSettings,
-//
-//     autoResize: true,
-//     edges: {
-//         smooth: false,
-//         color: "#000000",
-//         width: 0.5,
-//         arrows: {
-//             to: {
-//                 enabled: true,
-//                 scaleFactor: 0.5,
-//             },
-//         },
-//         chosen: {
-//             edge: function (values: any, id: string, selected: any, hovering: any) {
-//                 console.log("=====", id, selected, hovering);
-//                 values.width = values.width * 1.5;
-//             }
-//         },
-//         selectionWidth: function (width: any) {
-//             return width * 1.2;
-//         },
-//         // hoverWidth: function (width) {
-//         //     return width * 1.4;
-//         // }
-//         hoverWidth: function (width: any) {
-//             return width + 1;
-//         },
-//     },
-//     nodes: {
-//         // physics: false,
-//         shape: "dot",
-//         // size: 10,
-//         scaling: {
-//             min: 10,
-//             max: 10,
-//         },
-//         shapeProperties: {
-//             interpolation: true    // 'true' for intensive zooming
-//         }
-//     }
-// };
-
-
-const convertResponseToVisJsData = (responseData: any) => {
+const convertModelDataToVisJsData = (responseData: any) => {
     console.log("responseData", responseData);
     let allEdgesModels: any = [];
     let allVertexModels: any = [];
@@ -110,15 +46,28 @@ const convertResponseToVisJsData = (responseData: any) => {
     return {nodes: allVertexModels, edges: allEdgesModels}
 
 }
+
+const events = {}
 const GraphModellerView = () => {
-    const [expand, setExpand] = React.useState(true);
+    const [expand, setExpand] = React.useState(false);
+    const [canvasCtrl, setCanvasCtrl] = React.useState(null);
+
     const {loading, error, data} = useQuery(GET_SCHEMA_QUERY);
     // if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error :(</p>;
+    if (error) return <NetworkErrorUI error={error}/>;
     let graphData = {nodes: [], edges: []};
     if (!loading) {
-        graphData = convertResponseToVisJsData(data);
+        graphData = convertModelDataToVisJsData(data);
     }
+
+    function updateData() {
+        console.log("addnewData", canvasCtrl)
+        // {id: model.name, label: model.name,}
+        if (canvasCtrl) {
+            // canvasCtrl.addNewData([{id: "yolo", label: "yolo",}], []);
+        }
+    }
+
     console.log("====graphData", graphData)
     return (
         <div className="show-fake-browser sidebar-page">
@@ -129,19 +78,32 @@ const GraphModellerView = () => {
                 <StudioLeftNavSidebar expand={expand} setExpand={setExpand}/>
                 <Container>
                     <Header>
-                        <Breadcrumb>
-                            {/*<Breadcrumb.Item href={STUDIO_ROUTES.HOME}>Home</Breadcrumb.Item>*/}
-                            <Breadcrumb.Item href={STUDIO_ROUTES.MODELLER} active><strong>GRAPH
-                                MODELLER</strong></Breadcrumb.Item>
-                        </Breadcrumb>
+                        {/*<Breadcrumb>*/}
+                        {/*    /!*<Breadcrumb.Item href={STUDIO_ROUTES.HOME}>Home</Breadcrumb.Item>*!/*/}
+                        {/*    <Breadcrumb.Item href={STUDIO_ROUTES.MODELLER} active><strong>GRAPH*/}
+                        {/*        MODELLER</strong></Breadcrumb.Item>*/}
+                        {/*</Breadcrumb>*/}
+                        <Nav activeKey={"home"}>
+                            <Nav.Item eventKey="home" onClick={() => updateData()}>Home</Nav.Item>
+                            <Nav.Item eventKey="news">News</Nav.Item>
+                            <Nav.Item eventKey="solutions">Solutions</Nav.Item>
+                            <Nav.Item eventKey="products">Products</Nav.Item>
+                            <Nav.Item eventKey="about">About</Nav.Item>
+                        </Nav>
                     </Header>
                     <Content>
                         {loading ? (
-                            <Loader backdrop content="loading..." vertical/>
+                            <Loader backdrop content="Fetching schema model ..." vertical/>
                         ) : (
                             <span></span>
                         )}
-                        <CanvasArtBoard containerId={"artboard-1"} data={graphData} options={defaultOptions}/>
+                        <CanvasArtBoard
+                            containerId={"artboard-1"}
+                            newData={graphData}
+                            options={defaultOptions}
+                            events={events}
+                            getCanvasCtrl={setCanvasCtrl}
+                        />
 
                     </Content>
                 </Container>
