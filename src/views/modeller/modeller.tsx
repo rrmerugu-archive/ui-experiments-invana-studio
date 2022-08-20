@@ -77,7 +77,7 @@ const GraphModellerView = () => {
                 <StudioHeader/>
             </Container>
             <Container>
-                <StudioLeftNavSidebar expand={expand} setExpand={setExpand}/>
+                {/*<StudioLeftNavSidebar expand={expand} setExpand={setExpand}/>*/}
                 <Container>
                     <Header>
                         <Nav activeKey={"home"}>
